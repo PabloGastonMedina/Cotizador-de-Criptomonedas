@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Document</title>
+</head>
+<body>
+   <img src="Cripto1.png" alt="Imagen de criptomonedas">
+   <div class="conteiner2">
+    <form action="" id="formulario">
+
+        <label for="moneda">ELIGE TU MONEDA</label>
+        <select name="moneda" id="moneda">
+            <option value="">Elige tu moneda</option>
+            <option value="USD">Dolar Estadounidense</option>
+            <option value="ARS">Peso Argentino</option>
+            <option value="MXN">Peso Mexicano</option>
+            <option value="GBP">Libras</option>
+            <option value="EUR">Euros</option>
+        </select>
+
+        <label for="criptomoneda">ELIGE TU CRIPTOMONEDA</label>
+        <select name="criptomoneda" id="criptomoneda">
+             <option value="" disabled selected>Elige tu criptomoneda</option>
+        </select>
+
+        <input type="submit" class="btn" value="COTIZAR" />
+    </form>
+    <div></div>
+   </div>
+</body>
+
+<script src="app.js"></script>
+</html>
