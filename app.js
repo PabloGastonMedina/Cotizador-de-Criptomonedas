@@ -3,6 +3,9 @@ const criptomonedasSelect = document.querySelector("#criptomoneda");
 
 const formulario = document.querySelector("#formulario");
 
+const resultados = document.querySelector(".resultados");
+console.log(resultados)
+
 const objBusqueda = {
     moneda: "",
     criptomoneda : ""
@@ -87,6 +90,8 @@ function consultarApi(){
     const { moneda, criptomoneda} = objBusqueda;
     const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`
 
+    mostrarSpinner();
+
     fetch(url)
        .then( respuesta => respuesta.json())
        .then( cotizacion => {
@@ -95,5 +100,69 @@ function consultarApi(){
 }
 
 function mostrarCotizacionHTML(cotizacion){
-    console.log(cotizacion)
+
+    limpiarHTML();
+
+    const PRICE = cotizacion.PRICE;
+    const precio = document.createElement("p");
+    precio.classList.add("precio");
+    precio.innerHTML = `El precio es de <span>${PRICE}</span>`
+
+    const ALTO = cotizacion.HIGHDAY;
+    const precioAlto = document.createElement("p");
+    precioAlto.classList.add("precio");
+    precioAlto.innerHTML = `El precio mas alto del dia es de <span>${ALTO}</span>`
+
+    const LOWDAY = cotizacion.LOWDAY;
+    const precioMasBajo = document.createElement("p");
+    precioMasBajo.classList.add("precio");
+    precioMasBajo.innerHTML = `El precio mas bajo del dia es de <span>${LOWDAY}</span>`
+
+    const ULTIMA = cotizacion.CHANGEPCT24HOUR;
+    const ultimasHoras = document.createElement("p");
+    ultimasHoras.classList.add("precio");
+    ultimasHoras.innerHTML = `Variacion ultimas 24 horas <span>${ULTIMA}%</span>`
+
+    const ACTUALIZACION = cotizacion.LASTUPDATE;
+    const ultimaActualizacion = document.createElement("p");
+    ultimaActualizacion.classList.add("precio");
+    ultimaActualizacion.innerHTML = `Ultima actualización <span>${ACTUALIZACION}</span>`
+   
+
+    resultados.appendChild(precio)
+    resultados.appendChild(precioAlto)
+    resultados.appendChild(precioMasBajo)
+    resultados.appendChild(ultimasHoras)
+    resultados.appendChild(ultimaActualizacion)
+
+}
+
+function limpiarHTML(){
+    while(resultados.firstChild) {
+        resultados.removeChild(resultados.firstChild)
+    }
+}
+
+
+function mostrarSpinner(){
+    limpiarHTML();
+
+    const spinner = document.createElement("div");
+    spinner.classList.add("spinner")
+
+    spinner.innerHTML = `
+    <div class="dot-spinner">
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+    </div>
+    `
+
+    resultados.appendChild(spinner);
+
 }
